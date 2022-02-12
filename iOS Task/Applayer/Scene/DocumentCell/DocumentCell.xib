@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="111" id="1dF-35-qie" customClass="DocumentCell" customModule="iOS_Task" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="436" height="111"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1dF-35-qie" id="lIH-1h-Cco">
+                <rect key="frame" x="0.0" y="0.0" width="436" height="111"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbx-Kg-DCa">
+                        <rect key="frame" x="10" y="21" width="416" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="auther" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WR6-LC-K8E">
+                        <rect key="frame" x="10" y="40.5" width="416" height="49.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.28627450980000002" green="0.27450980390000002" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="dbx-Kg-DCa" secondAttribute="trailing" constant="10" id="7Vs-iD-Xps"/>
+                    <constraint firstItem="WR6-LC-K8E" firstAttribute="top" secondItem="dbx-Kg-DCa" secondAttribute="bottom" id="BZh-Gx-0on"/>
+                    <constraint firstItem="dbx-Kg-DCa" firstAttribute="leading" secondItem="lIH-1h-Cco" secondAttribute="leading" constant="10" id="JTU-w2-pPz"/>
+                    <constraint firstItem="dbx-Kg-DCa" firstAttribute="top" secondItem="lIH-1h-Cco" secondAttribute="topMargin" constant="10" id="Txk-Z4-nA3"/>
+                    <constraint firstItem="WR6-LC-K8E" firstAttribute="leading" secondItem="lIH-1h-Cco" secondAttribute="leading" constant="10" id="pUS-Ye-hND"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="WR6-LC-K8E" secondAttribute="bottom" constant="10" id="weM-vw-I6c"/>
+                    <constraint firstAttribute="trailing" secondItem="WR6-LC-K8E" secondAttribute="trailing" constant="10" id="zhV-E7-n92"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="lblAuther" destination="WR6-LC-K8E" id="W08-gr-tRh"/>
+                <outlet property="lblTitl" destination="dbx-Kg-DCa" id="cXd-GH-B7D"/>
+            </connections>
+            <point key="canvasLocation" x="57.600000000000001" y="106.59670164917542"/>
+        </tableViewCell>
+    </objects>
+</document>
