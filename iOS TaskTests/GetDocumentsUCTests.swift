@@ -11,14 +11,14 @@ import Combine
 
 class GetDocumentsUCTests: XCTestCase {
     let repo = MockDocumentRepo()
-    var uc: GetDocumentsUC = GetDocumentsUC(repo: MockDocumentRepo())
-    private var subscriptions = Set<AnyCancellable>()
-    override func tearDown() {
-        subscriptions = []
+    var getDocumentsUC: GetDocumentsUC!// = GetDocumentsUC(repo: MockDocumentRepo())
+    private let cancelBag = CancelBag()
+    override func setUp() {
+    getDocumentsUC = GetDocumentsUC(repo: MockDocumentRepo())
+        super.setUp()
     }
-    
-    override func setUpWithError() throws {
-        
+    override func tearDown() {
+        cancelBag.cancel()
     }
 
     
@@ -27,16 +27,14 @@ class GetDocumentsUCTests: XCTestCase {
         let expectation = self.expectation(description: #function)
         var result:[DocumentItemViewModel]!
         
-        
-        
-        uc.getDocuments(arg: .fetch())
+        getDocumentsUC.getDocuments(arg: .fetch())
             .map({$0.items})
             .sink { error in
                 
             } receiveValue: { docs in
                 result = docs
                 expectation.fulfill()
-            }.store(in: &subscriptions)
+            }.store(in: cancelBag)
         
         waitForExpectations(timeout: 2, handler: nil)
         XCTAssertNotNil(result, "expected not null but it is")
@@ -52,14 +50,14 @@ class GetDocumentsUCTests: XCTestCase {
         var result:[DocumentItemViewModel]!
         var page:Int!
         
-        uc.getDocuments(arg: .srearch(1, SearchDocuemtFilds(query: "ssdsd")))
+        getDocumentsUC.getDocuments(arg: .srearch(1, SearchDocuemtFilds(query: "ssdsd")))
             .sink { error in
                 
             } receiveValue: { output in
                 page = output.page
                 result = output.items
             }
-            .store(in: &subscriptions)
+            .store(in: cancelBag)
         XCTAssert(page == 1, "Page expected to be 1 but was \(String(describing: page))")
         
         XCTAssert(result.first == expected , "dcoument expected to be \(expected) but was \(result)")
@@ -73,14 +71,14 @@ class GetDocumentsUCTests: XCTestCase {
         var result:[DocumentItemViewModel]!
         var page:Int!
         
-        uc.getDocuments(arg: .srearch(1, SearchDocuemtFilds(query: "ssdsd")))
+        getDocumentsUC.getDocuments(arg: .srearch(1, SearchDocuemtFilds(query: "ssdsd")))
             .sink { error in
                 
             } receiveValue: { output in
                 page = output.page
                 result = output.items
             }
-            .store(in: &subscriptions)
+            .store(in: cancelBag)
         XCTAssert(page != 2, "Page expected to be 1 but was \(String(describing: page))")
         
         XCTAssert(result.first != expected , "dcoument expected to be \(expected) but was \(result)")
@@ -94,14 +92,14 @@ class GetDocumentsUCTests: XCTestCase {
         var result:[DocumentItemViewModel]!
         var page:Int!
         
-        uc.getDocuments(arg: .srearch(2, SearchDocuemtFilds(query: "ssdsd")))
+        getDocumentsUC.getDocuments(arg: .srearch(2, SearchDocuemtFilds(query: "ssdsd")))
             .sink { error in
                 
             } receiveValue: { output in
                 page = output.page
                 result = output.items
             }
-            .store(in: &subscriptions)
+            .store(in: cancelBag)
         XCTAssert(page == 2, "Page expected to be 2 but was \(String(describing: page))")
         
         XCTAssert(result.first == expected , "dcoument expected to be \(expected) but was \(result)")
@@ -115,14 +113,14 @@ class GetDocumentsUCTests: XCTestCase {
         var result:[DocumentItemViewModel]!
         var page:Int!
         
-        uc.getDocuments(arg: .srearch(1, SearchDocuemtFilds(query: "ssdsd")))
+        getDocumentsUC.getDocuments(arg: .srearch(1, SearchDocuemtFilds(query: "ssdsd")))
             .sink { error in
                 
             } receiveValue: { output in
                 page = output.page
                 result = output.items
             }
-            .store(in: &subscriptions)
+            .store(in:cancelBag)
         XCTAssert(page == 1, "Page expected to be 2 but was \(String(describing: page))")
         
         XCTAssert(result.first == expected , "dcoument expected to be \(expected) but was \(result)")

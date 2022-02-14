@@ -8,7 +8,7 @@
 
 import Combine
 
-public struct GetPageInput<TriggerInput, Item , U> {
+public struct GetPageInput<TriggerInput, Item > {
     let pageSubject: CurrentValueSubject<PagingInfo<Item>, Never>
     let errorTracker: ErrorTracker
     let loadTrigger: AnyPublisher<TriggerInput, Never>
@@ -17,7 +17,6 @@ public struct GetPageInput<TriggerInput, Item , U> {
     let fetchItems: (TriggerInput) -> AnyPublisher<PagingInfo<Item>, Error>    
     let reloadItems: (TriggerInput) -> AnyPublisher<PagingInfo<Item>, Error>
     let loadMoreItems: (TriggerInput) -> AnyPublisher<PagingInfo<Item>, Error>
-    let mapper: (Item) -> U
     public init(pageSubject: CurrentValueSubject<PagingInfo<Item>, Never>,
                 errorTracker: ErrorTracker,
                 loadTrigger: AnyPublisher<TriggerInput, Never>,
@@ -25,8 +24,7 @@ public struct GetPageInput<TriggerInput, Item , U> {
                 reloadTrigger: AnyPublisher<TriggerInput, Never>,
                 reloadItems: @escaping (TriggerInput) -> AnyPublisher<PagingInfo<Item>, Error>,
                 loadMoreTrigger: AnyPublisher<TriggerInput, Never>,
-                loadMoreItems: @escaping (TriggerInput) -> AnyPublisher<PagingInfo<Item>, Error>,
-                mapper: @escaping (Item) -> U
+                loadMoreItems: @escaping (TriggerInput) -> AnyPublisher<PagingInfo<Item>, Error>
     ) {
         self.pageSubject = pageSubject
         self.errorTracker = errorTracker
@@ -36,7 +34,6 @@ public struct GetPageInput<TriggerInput, Item , U> {
         self.fetchItems = fetchItems
         self.reloadItems = reloadItems
         self.loadMoreItems = loadMoreItems
-        self.mapper = mapper
     }
 }
 
@@ -56,8 +53,7 @@ public extension GetPageInput{
                   reloadTrigger: reloadTrigger,
                   reloadItems: { fetchItems($0) },
                   loadMoreTrigger: loadMoreTrigger,
-                  loadMoreItems: { x in fetchItems(x) },
-                  mapper: {c in c as! U }
+                  loadMoreItems: { x in fetchItems(x) }
         )
     }
 }
@@ -95,7 +91,7 @@ public struct GetPageResult<Item> {
 
 
 public extension ViewModel {
-    func getPage<Item>(input: GetPageInput<APIFetchType, Item, String>)
+    func getPage<Item>(input: GetPageInput<APIFetchType, Item>)
         -> GetPageResult<Item> {
             
         let loadingActivityTracker = ActivityTracker(false)

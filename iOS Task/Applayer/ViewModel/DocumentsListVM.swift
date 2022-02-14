@@ -42,7 +42,7 @@ class DocumentsListVM:ViewModel {
     func perform(_ input: Input, cancelBag: CancelBag) -> Output {
         let output = Output()
         
-        let getPageInput = GetPageInput<APIFetchType,DocumentItemViewModel,String>(loadTrigger: input.loadTrigger,
+        let getPageInput = GetPageInput<APIFetchType,DocumentItemViewModel>(loadTrigger: input.loadTrigger,
                                                                                    reloadTrigger: input.reloadTrigger,
                                                                                    loadMoreTrigger: input.loadMoreTrigger,
                                                                                    fetchItems: getDocumentsUC.getDocuments)
