@@ -49,11 +49,11 @@ public extension GetPageInput{
         self.init(pageSubject: CurrentValueSubject<PagingInfo<Item>, Never>(PagingInfo<Item>()),
                   errorTracker: ErrorTracker(),
                   loadTrigger: loadTrigger,
-                  fetchItems: { x in fetchItems(x) },
+                  fetchItems: { input in fetchItems(input) },
                   reloadTrigger: reloadTrigger,
                   reloadItems: { fetchItems($0) },
                   loadMoreTrigger: loadMoreTrigger,
-                  loadMoreItems: { x in fetchItems(x) }
+                  loadMoreItems: { input in fetchItems(input) }
         )
     }
 }

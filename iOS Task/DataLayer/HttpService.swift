@@ -31,7 +31,7 @@ class HttpService/*: DataSource*/{
             url: input.url,
             cachePolicy: .reloadIgnoringLocalCacheData,
             timeoutInterval: 60)
-        
+        request.allHTTPHeaderFields = ["":""]
         request.httpMethod = input.method
                 
         return manager.dataTaskPublisher(for: request)

@@ -17,10 +17,10 @@ class GetDocumentsUCTests: XCTestCase {
     getDocumentsUC = GetDocumentsUC(repo: MockDocumentRepo())
         super.setUp()
     }
+   
     override func tearDown() {
         cancelBag.cancel()
     }
-
     
     func test_GetDocuments_fetchDocuments() throws{
         
